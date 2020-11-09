@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Those meta make the capture of handwriting inputs easier on mobile devices -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="HandheldFriendly" content="true" />
+
+    <title>MathWise</title>
+    <link rel="stylesheet" href="examples.css">
+    <link href="//db.onlinewebfonts.com/c/ebea2aa546d58c52c20de57835663484?family=Bradley+Hand+ITC+Std" rel="stylesheet"
+        type="text/css" />
+
+
+    <!-- <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.css"> -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css">
+
+    <link rel="stylesheet" href="custom.css">
+
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+    <!-- As web components are not fully supported -->
+    <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+
+    <!-- myscript-math-web is imported to be used later -->
+    <script type="module" src="node_modules/myscript-math-web/myscript-math-web.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <script src="fontawesome.js"></script>
+
+    <script src="mathwise.js"></script>
+
+    <custom-style>
+        <style>
+            paper-fab {
+                --paper-button-ink-color: white;
+                --paper-fab-background: #1A9FFF;
+            }
+        </style>
+    </custom-style>
+</head>
+
+<body>
+
+    <div id="about"></div>
+    <div id="myHelpContent"></div>
+
+    <nav
+        style="border: 1px solid #384448;height: 50px;background: #2b5e70;width: 99.5%;display: inline-block;text-align: center;line-height: 1.4;">
+
+        <div>
+
+            <button class=""
+                style="float: left;position: absolute;top: 5px;left: 20px;border: none;border-radius: 25px;background: #2b5e70;padding: 3px;"
+                onclick="openAbout()">
+                <i class="fas fa-calculator-alt fa-2x" aria-hidden="true" data-toggle="tooltip" data-placement="left"
+                    title="" style="color: white;"></i>
+            </button>
+
+            <div style="color: #fff;font-size: 28px;font-family: Calibri;font-variant: petite-caps;line-height: 1;">
+                MathWise
+            </div>
+
+            <div style="font-size: 16px;color: white;font-family: Ink Free;line-height: 0;line-height: 1;">An
+                Interactive
+                Math
+                Assistant
+            </div>
+
+        </div>
+
+        <button class="spin"
+            style="float: right;position: absolute;top: 4px;right: 30px;border: none;border-radius: 25px;background: #2b5e70;padding: 3px;">
+            <i class="fas fa-question-circle fa-2x" aria-hidden="true" data-toggle="tooltip" data-placement="left"
+                title="Gesture Assistant" onmouseover="openHelp()"></i>
+        </button>
+
+    </nav>
+
+    <div class="recognition-here">Recognition Window</div>
+    <div class="write-here">Write your equation here... </div>
+
+    <myscript-math-web disablesolver disablecontrols alwaysconnected scheme="https" host="webdemoapi.myscript.com"
+        applicationkey="515131ab-35fa-411c-bb4d-3917e00faf60" hmackey="54b2ca8a-6752-469d-87dd-553bb450e9ad"
+        mimetypes='["application/x-latex"]' solverfractionalpartdigit="5" solverdecimalseparator="."
+        solverangleunit="rad" touch-action="none" processdelay=0
+        style="width: 70%;border: 2px solid #006487;float: left;margin-top: 2px;margin-left: 2px;">
+    </myscript-math-web>
+
+    <div class="gesture-here">Gesture Pad </div>
+
+    <myscript-math-web id="editor2" disableconvertcontrol disablesolver disablecontrols hideexportzone
+        disableundoredocontrol alwaysconnected scheme="https" host="webdemoapi.myscript.com"
+        applicationkey="515131ab-35fa-411c-bb4d-3917e00faf60" hmackey="54b2ca8a-6752-469d-87dd-553bb450e9ad"
+        mimetypes='["application/x-latex"]' touch-action="none"
+        style="width: 29%;border: 2px solid #006487;float: right;margin-top: 2px;margin-right: 5px;margin-left: 5px;margin-bottom: 5px;height: 250px;">
+    </myscript-math-web>
+
+    <div
+        style="padding: 5px;border: 1px solid #006487;width: 29%;float: right;margin-top: -4px;margin-left: 5px;margin-right: 5px;height: 300px;">
+        <div id="tab">
+            <div class="resultFormat"
+                style="color: #000000;font-weight: bold;text-align: center;outline: none;cursor: pointer;padding: 5px 16px;transition: 0.3s;font-size: 17px;border: 1px solid #78c6b7;background-color: #78c6b7;margin-bottom: 10px;font-variant: petite-caps;">
+            </div>
+
+            <div class="toast1" id="latexcontent"></div>
+            <img id="myImgSrc" src="" style="margin-top: 20px; margin-left: 10px; min-width: 150px;">
+            <br>
+
+            <div class="loader" style="display: none;"></div>
+
+            <div class="loaderMessage" style="display: none;position: absolute; top: 400px;margin-left: 8%;">
+                <img src="images/loaderMessage.gif" alt="" />
+                <span style="display: block; font-family: cursive; font-size: 18px;">Recognizing Gesture...</span>
+            </div>
+
+            <!-- Copy Option starts -->
+            <i class="fa fa-clone" id="btnCopy" aria-hidden="true" onclick="copyTextToClipboard()" data-toggle="tooltip"
+                data-placement="top" title="Copy"></i>
+            <input type="text" id="fakeinput" style="opacity: 0; margin-left: 15px;" />
+            <!-- Copy Option ends -->
+
+            <div class="toast" data-delay="1000" data-animation="true"
+                style="width: 160px;background-color: #2b5e70;color: white;font-weight: 500;position: absolute;bottom: 20px;z-index: 999;line-height: 1;">
+                <div class="toast-body">
+                    Copied to ClipBoard!
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+
+        var toastDiv = document.getElementById("latexcontent");
+        var copyButton = document.getElementById("btnCopy");
+        var imgElement = document.getElementById("myImgSrc");
+        var component1 = document.querySelector('myscript-math-web');
+
+
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+        $(function () {
+            $("#about").load("about.html");
+            $("#myHelpContent").load("myhelp.html");
+        });
+
+        function copyTextToClipboard() {
+            if (toastDiv.textContent != "") {
+                var fakeInput = document.getElementById('fakeinput');
+                fakeInput.value = toastDiv.textContent;
+                fakeInput.select();
+                try {
+                    var successful = document.execCommand('copy')
+                    if (successful) {
+                        document.querySelector('#tab .toast .toast-body').textContent = "Copied to ClipBoard!";
+                        $('.toast').toast('show');
+                    }
+                    var msg = successful ? 'successfully' : 'unsuccessfully'
+                    console.log("Copy Content - ", msg);
+                } catch (err) {
+                    console.log("Copy Content Failed", err);
+                }
+            }
+            else if (!imgElement.src.includes("localhost")) {
+                copyImageToClipboard('myImgSrc');
+            }
+            else {
+                document.querySelector('#tab .toast .toast-body').textContent = "Nothing to Copy!";
+                $('.toast').toast('show');
+            }
+        }
+
+        function copyImageToClipboard(Id) {
+            var imgs = document.createElement('img');
+            imgs.src = document.getElementById(Id).src;
+            var bodys = document.body;
+            bodys.appendChild(imgs);
+            if (document.createRange) {
+                var myrange = document.createRange();
+                myrange.setStartBefore(imgs);
+                myrange.setEndAfter(imgs);
+                myrange.selectNode(imgs);
+            }
+            else {
+                alert('CreateRange NOT work');
+            }
+            var sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(myrange);
+
+            var successful = document.execCommand('copy');
+            if (successful) {
+                document.querySelector('#tab .toast .toast-body').textContent = "Copied to ClipBoard!";
+                $('.toast').toast('show');
+            }
+            else {
+                document.querySelector('#tab .toast .toast-body').textContent = "Sorry, Copy failed!";
+                $('.toast').toast('show');
+            }
+            var msg = successful ? 'successful' : 'unsuccessful';
+            bodys.removeChild(imgs);
+        }
+
+        function openHelp() {
+            document.getElementById("myHelp").style.height = "90.5%";
+            document.getElementById("myHelp").style.border = "1px solid #006487";
+        }
+
+        function closeHelp() {
+            document.getElementById("myHelp").style.height = "0%";
+            document.getElementById("myHelp").style.border = "none";
+
+        }
+
+        function openAbout() {
+            document.getElementById("myAbout").style.height = "100%";
+            document.getElementById("myAbout").style.border = "1px solid #006487";
+        }
+
+        function closeAbout() {
+            document.getElementById("myAbout").style.height = "0%";
+            document.getElementById("myAbout").style.border = "none";
+        }
+
+    </script>
+
+</body>
+
+</html>
