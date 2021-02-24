@@ -6,6 +6,6 @@ The application development is still in progress as we plan to optimize the code
 ### To Run the Application:
  1. Clone the Project
  2. Install [Node](https://nodejs.org/en/download/)
- 3. In command prompt, run: npm install 
- 4. Launch a local Web server to start using it. Recommended to use [Polymer](https://polymer-library.polymer-project.org/3.0/docs/install-3-0)
- 5. In commonad prompt, run: polymer serve (Application will be hosted on http://localhost:8081/)
+ 3. Open terminal in the project folder and run: npm install 
+ 4. Launch a local Web server to start using the application. Recommended to use [Polymer](https://polymer-library.polymer-project.org/3.0/docs/install-3-0). \
+    Run the command: polymer serve (Application will be hosted on http://localhost:8081/)
