@@ -3,7 +3,7 @@ MathWise is an Interactive math expression editor with a handwriting recognition
 
 The application development is still in progress as we plan to optimize the code and add more features.
 
-## Run the application locally by following these steps:
+### To Run the Application:
  1. Clone the Project
  2. Install [Node](https://nodejs.org/en/download/)
  3. In command prompt, run: npm install 
