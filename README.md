@@ -8,4 +8,4 @@ The application development is still in progress as we plan to optimize the code
  2. Install [Node](https://nodejs.org/en/download/)
  3. Open terminal in the project folder and run: npm install 
  4. Launch a local Web server to start using the application. Recommended to use [Polymer](https://polymer-library.polymer-project.org/3.0/docs/install-3-0). \
-    Run the command: polymer serve (Application will be hosted on http://localhost:8081/)
+    Run the command: ```polymer serve``` (Application will be hosted on http://localhost:8081/)
